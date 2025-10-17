@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Алгебра</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/sky.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
@@ -16,8 +16,117 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Слайд 1</section>
-				<section>Slide 2</section>
+				<section class="center">
+					<h1>
+						Алгебра
+					</h1>
+				</section>
+				<section class="center">
+					<h2>
+						Определения
+					</h2>
+				</section>
+				<section>
+					<section data-markdown="markdown/matrix.md"></section>
+					<section data-markdown="markdown/example_matrix.md"></section>
+				</section>
+				<section class="center">
+					<h2>
+						Виды матриц
+					</h2>
+				</section>
+				<section data-markdown="markdown/matrix_square.md"></section>
+				<section data-markdown="markdown/matrix_null.md"></section>
+				<section data-markdown="markdown/matrix_str.md"></section>
+				<section data-markdown="markdown/matrix_stl.md"></section>
+				<section>
+				<section data-markdown="markdown/matrix_diag.md"></section>
+				<section data-markdown>
+						<script type="text/template">
+							### Диагональная матрица
+							Пример:
+							$$
+							A = \begin{pmatrix}
+							1 & 0 & 0 & 0 \\\\ 
+							0 & 5 & 0 & 0 \\\\ 
+							0 & 0 & -2 & 0 \\\\ 
+							0 & 0 & 0 & 8
+							\end{pmatrix}
+							$$
+						</script>
+				</section>
+				</section>
+				<section data-markdown="markdown/matrix_ed.md"></section>
+				<section data-markdown="markdown/matrix_up_tri.md"></section>
+				<section data-markdown="markdown/matrix_down_tri.md"></section>
+				<section class="center">
+					<h2>
+						Операции над матрицами
+					</h2>
+				</section>
+				<section>
+					<section data-markdown="markdown/matrix_add.md"></section>
+					<section data-markdown="markdown/matrix_add_alg.md"></section>
+					<section data-markdown="markdown/add_ex.md"></section>
+				</section>
+				<section>
+					<section data-markdown="markdown/matrix_mult.md"></section>
+					<section data-markdown="markdown/matrix_mult_alg.md"></section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+#### Алгоритм умножения матриц
+Умножаем элементы в строках первой матрицы на элементы в столбцах второй матрицы.
+
+1. Умножаем элементы первой строки на элементы первого столбца.
+    - Умножаем первый элемент первой строки на первый элемент первого столбца.
+    - Умножаем второй элемент первой строки на второй элемент первого столбца.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+							#### Алгоритм умножения матриц
+- Делаем то же самое с каждым элементом, пока не дойдем до конца как первой строки первой матрицы, так и первого столбца второй матрицы.
+- Складываем полученные произведения.
+- Полученный результат будет первым элементом первой строки произведения матриц.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+							#### Алгоритм умножения матриц
+2. Умножаем элементы первой строки первой матрицы на элементы второго столбца второй матрицы.
+    - Умножаем первый элемент первой строки на первый элемент второго столбца.
+    - Умножаем второй элемент первой строки на второй элемент второго столбца.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+							#### Алгоритм умножения матриц
+- Делаем то же самое с каждым элементом, пока не дойдем до конца как первой строки первой матрицы, так и второго столбца второй матрицы.
+- Складываем полученные произведения.
+- Полученный результат будет вторым элементом первой строки произведения матриц.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+							#### Алгоритм умножения матриц
+3. Применяя тот же самый алгоритм, умножаем элементы первой строки первой матрицы на элементы остальных столбцов второй матрицы. Полученные числа составят первую строку вычисляемой матрицы.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### Умножение матриц
+							#### Алгоритм умножения матриц
+4. Вторая строка вычисляемой матрицы находится аналогично умножением элементов второй строки первой матрицы на элементы каждого столбца второй матрицы: результаты записываются в новую матрицу после каждого суммирования.
+5. Делаем это с каждой строкой первой матрицы, пока все строки новой матрицы не будут заполнены.
+						</script>
+					</section>
+					<section data-markdown="markdown/mult_ex.md"></section>
+				</section>
 			</div>
 		</div>
 
@@ -31,6 +140,25 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				center: false,
+				dependencies: [
+					{
+						src: 'plugin/katex/katex.js',
+						async: true,
+					},
+					{
+						src: 'plugin/menu/menu.js'
+					},
+					{
+						src: 'plugin/fukkscreen/fullscreen.js'
+					}
+				],
+				menu: {
+					numbers: true,
+					markers: true,
+				},
+				slideNumber: true,
+				controls: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
