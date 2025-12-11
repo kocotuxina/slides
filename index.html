@@ -9,9 +9,103 @@
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+		<style>
+			.matrix-input {
+				display: flex;
+				gap: 50px;
+				justify-content: center;
+				align-items: flex-start;
+				margin-top: 20px;
+			}
+			
+			.matrix-input textarea {
+				width: 150px;
+				height: 150px;
+				font-family: monospace;
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				resize: none;
+			}
+			
+			.matrix-2x2-input {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+				margin-top: 20px;
+			}
+			
+			.matrix-2x2-grid {
+				display: grid;
+				grid-template-columns: 60px 60px;
+				grid-template-rows: 60px 60px;
+				gap: 10px;
+				margin: 20px 0;
+			}
+			
+			.matrix-2x2-grid input {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				font-size: 18px;
+				border: 2px solid #ccc;
+				border-radius: 5px;
+			}
+			
+			.matrix-2x2-grid input:focus {
+				border-color: #1a73e8;
+				outline: none;
+			}
+			
+			.matrix-controls {
+				margin-top: 20px;
+				display: flex;
+				gap: 20px;
+				justify-content: center;
+			}
+			
+			.matrix-controls button {
+				padding: 10px 20px;
+				font-size: 16px;
+				border: none;
+				border-radius: 5px;
+				background-color: #1a73e8;
+				color: white;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+			
+			.matrix-controls button:hover {
+				background-color: #0d5bb5;
+			}
+			
+			.result-container {
+				margin-top: 30px;
+				padding: 20px;
+				background-color: #f8f9fa;
+				border-radius: 10px;
+				border: 1px solid #dee2e6;
+				min-height: 80px;
+			}
+			
+			.matrix-format-hint {
+				font-size: 14px;
+				color: #666;
+				margin-top: 5px;
+				text-align: center;
+			}
+			.code {
+
+			}
+			
+			
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -29,6 +123,11 @@
 				<section>
 					<section data-markdown="markdown/matrix.md"></section>
 					<section data-markdown="markdown/example_matrix.md"></section>
+					<section 
+						data-background-image="img/img2.jpeg"
+						data-background-size="contain"
+						data-menu-title="Мем"
+					></section>
 				</section>
 				<section class="center">
 					<h2>
@@ -66,12 +165,12 @@
 				</section>
 				<section>
 					<section data-markdown="markdown/matrix_add.md"></section>
-					<section data-markdown="markdown/matrix_add_alg.md"></section>
-					<section data-markdown="markdown/add_ex.md"></section>
+					<section data-markdown="markdown/matrix_add_alg.md" data-menu-title="Алгоритм сложения матриц"></section>
+					<section data-markdown="markdown/add_ex.md" data-menu-title="Пример сложения матриц"></section>
 				</section>
 				<section>
 					<section data-markdown="markdown/matrix_mult.md"></section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 #### Алгоритм умножения матриц
@@ -82,7 +181,7 @@
     - Умножаем второй элемент первой строки на второй элемент первого столбца.
 						</script>
 					</section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 							#### Алгоритм умножения матриц
@@ -91,7 +190,7 @@
 - Полученный результат будет первым элементом первой строки произведения матриц.
 						</script>
 					</section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 							#### Алгоритм умножения матриц
@@ -100,7 +199,7 @@
     - Умножаем второй элемент первой строки на второй элемент второго столбца.
 						</script>
 					</section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 							#### Алгоритм умножения матриц
@@ -109,14 +208,14 @@
 - Полученный результат будет вторым элементом первой строки произведения матриц.
 						</script>
 					</section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 							#### Алгоритм умножения матриц
 3. Применяя тот же самый алгоритм, умножаем элементы первой строки первой матрицы на элементы остальных столбцов второй матрицы. Полученные числа составят первую строку вычисляемой матрицы.
 						</script>
 					</section>
-					<section data-markdown>
+					<section data-markdown data-menu-title="Алгоритм умножения матриц">
 						<script type="text/template">
 							### Умножение матриц
 							#### Алгоритм умножения матриц
@@ -124,7 +223,174 @@
 5. Делаем это с каждой строкой первой матрицы, пока все строки новой матрицы не будут заполнены.
 						</script>
 					</section>
-					<section data-markdown="markdown/mult_ex.md"></section>
+					<section data-markdown="markdown/mult_ex.md" data-menu-title="Пример умножения матриц"></section>
+					<section 
+						data-background-image="img/img1.jpg"
+						data-background-size="contain"
+						data-menu-title="Мем"
+					></section>
+				</section>
+				<section>
+					<section data-markdown="markdown/determinant.md"></section>
+					<section data-markdown data-menu-title="Алгоритм нахождения определителя матрицы">
+						<script type="text/template">
+							### Определитель матрицы
+							#### Алгоритм нахождения определителя матрицы
+							Определитель равен сумме произведений элементов из каждой строки и каждого столбца с определёнными знаками, а геометрически представляет собой объём параллелепипеда, построенного на векторах-столбцах (или строках) матрицы. 
+						</script>
+					</section>
+					<section data-markdown data-menu-title="Алгоритм нахождения определителя матрицы">
+						<script type="text/template">
+							### Определитель матрицы
+							#### Алгоритм нахождения определителя матрицы
+							Для матрицы $1\times1$: $|a|=a$.
+							
+							Для матрицы $2\times2$: $ \left|\begin{matrix} a&b \\\\ c&d\end{matrix}\right|=ad-bc$.
+
+							Для матрицы $3\times3$: (правило треугольника): Суммируются произведения элементов главной диагонали и диагоналей, параллельных ей, а затем вычитаются произведения элементов побочной диагонали и диагоналей, параллельных ей.
+						</script>
+					</section>
+					<section data-markdown data-menu-title="Пример нахождения определителя матрицы 2x2">
+						<script type="text/template">
+							### Определитель матрицы
+							#### Пример нахождения определителя матрицы $2\times2$
+							$$
+							A = \begin{pmatrix}
+							10 & 3 \\\\
+							12 & 4
+							\end{pmatrix}
+							$$
+
+							$$|A| = 10\cdot4 - 12\cdot3 = 4 $$
+						</script>
+					</section>
+				</section>
+				<section class="center">
+					<h2>
+						Программы для вычисления операций над матрицами
+					</h2>
+				</section>
+				<section>
+					<h3>Сложение матриц</h3>
+					<div class="matrix-input">
+						<div>
+							<h4>Матрица A</h4>
+							<textarea id="add_matrix_a" placeholder="1 2 3
+                            4 5 6
+                            7 8 9">1 2 3
+                            4 5 6
+                            7 8 9</textarea>
+						</div>
+						<div>
+							<h4>Матрица B</h4>
+							<textarea id="add_matrix_b" placeholder="9 8 7
+                            6 5 4
+                            3 2 1">9 8 7
+                            6 5 4
+                            3 2 1</textarea>
+						</div>
+					</div>
+					<div class="matrix-format-hint">Вводите числа через пробелы, строки через Enter</div>
+					<div class="matrix-controls">
+						<button onclick="addMatrices()">Сложить матрицы</button>
+						<button onclick="clearAddInput()">Очистить</button>
+					</div>
+					
+					<div id="add_result" class="result-container">
+						Результат появится здесь...
+					</div>
+				</section>
+				<section data-menu-title="Исходный код программы">
+					<h3>Исходный код программы:</h3>
+					<pre><code class="javascript" data-trim data-line-numbers>
+							for (let i = 0; i < rows; i++) {
+								result[i] = [];
+								for (let j = 0; j < cols; j++) {
+									result[i][j] = A[i][j] + B[i][j];
+								}
+							}
+					</code></pre>
+				</section>
+				<section>
+					<h3>Умножение матриц</h3>
+					<div class="matrix-input">
+						<div>
+							<h4>Матрица A</h4>
+							<textarea id="mult_matrix_a" placeholder="1 2 3
+                            4 5 6">1 2 3
+                            4 5 6</textarea>
+						</div>
+						<div>
+							<h4>Матрица B</h4>
+							<textarea id="mult_matrix_b" placeholder="7 8
+                            9 10
+                            11 12">7 8
+                            9 10
+                            11 12</textarea>
+						</div>
+					</div>
+					<div class="matrix-format-hint">Вводите числа через пробелы, строки через Enter</div>
+					<div class="matrix-controls">
+						<button onclick="multiplyMatrices()">Умножить матрицы</button>
+						<button onclick="clearMultInput()">Очистить</button>
+					</div>
+					<div id="mult_result" class="result-container">
+						Результат появится здесь...
+					</div>
+				</section>
+				<section data-menu-title="Исходный код программы">
+					<h3>Исходный код программы:</h3>
+					<pre><code class="javascript" data-trim data-line-numbers>
+							for (let i = 0; i < rowsA; i++) {
+								result[i] = [];
+								for (let j = 0; j < colsB; j++) {
+									let sum = 0;
+									for (let k = 0; k < colsA; k++) {
+										sum += A[i][k] * B[k][j];
+									}
+									result[i][j] = sum;
+								}
+							}
+					</code></pre>
+				</section>
+				<section>
+					<section>
+						<h3>Вычисление определителя матрицы 2×2</h3>
+						<div class="matrix-2x2-input">
+							<h4>Введите элементы матрицы $2\times2$:</h4>
+							<div class="matrix-2x2-grid">
+								<input type="number" id="det_a11" value="10" placeholder="a">
+								<input type="number" id="det_a12" value="3" placeholder="b">
+								<input type="number" id="det_a21" value="12" placeholder="c">
+								<input type="number" id="det_a22" value="4" placeholder="d">
+							</div>
+						
+							<div class="matrix-controls">
+								<button onclick="calculateDeterminant2x2()">Вычислить определитель</button>
+								<button onclick="clearDetInput()">Очистить</button>
+								<button onclick="loadExampleDet()">Пример</button>
+							</div>
+							<div class="result-container">
+								Результат будет ниже
+							</div>
+						</div>
+					</section>
+					<section data-menu-title="Результат определителя матрицы">
+						<div id="det_result" class="result-container">
+							Результат появится здесь...
+						</div>
+					</section>
+				</section>
+				<section>
+					<h3>Исходный код программы:</h3>
+					<pre><code class="javascript" data-trim data-line-numbers>
+						let determinant = (a * d) - (b * c);
+					</code></pre>
+				</section>
+				<section class="center">
+					<h2>
+						Спасибо за внимание!
+					</h2>
 				</section>
 			</div>
 		</div>
@@ -161,6 +427,247 @@
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+			// Преобразование текста в матрицу (числовой массив)
+			function textToMatrix(text) {
+				let matrix = text.trim().split("\n");
+				for (let i in matrix) {
+					matrix[i] = matrix[i].trim().split(/\s+/).map(Number);
+				}
+				return matrix;
+			}
+			
+			// Преобразование матрицы в LaTeX строку
+			function matrixToLatex(matrix) {
+				let rows = matrix.length;
+				let cols = matrix[0].length;
+				let latex = "\\begin{pmatrix}\n";
+				
+				for (let i = 0; i < rows; i++) {
+					for (let j = 0; j < cols; j++) {
+						latex += matrix[i][j];
+						if (j < cols - 1) {
+							latex += " & ";
+						}
+					}
+					if (i < rows - 1) {
+						latex += " \\\\\n";
+					}
+				}
+				latex += "\n\\end{pmatrix}";
+				return latex;
+			}
+			
+			// Сложение матриц
+			function addMatrices() {
+				try {
+					let aText = document.querySelector('#add_matrix_a').value;
+					let bText = document.querySelector('#add_matrix_b').value;
+					
+					let A = textToMatrix(aText);
+					let B = textToMatrix(bText);
+					
+					if (A.length !== B.length || A[0].length !== B[0].length) {
+						document.getElementById('add_result').innerHTML = 
+							'<div style="color: red;">Ошибка: матрицы должны быть одинакового размера!</div>';
+						return;
+					}
+					
+					let rows = A.length;
+					let cols = A[0].length;
+					let result = [];
+					
+					// Сложение
+					for (let i = 0; i < rows; i++) {
+						result[i] = [];
+						for (let j = 0; j < cols; j++) {
+							result[i][j] = A[i][j] + B[i][j];
+						}
+					}
+					
+					let latexA = matrixToLatex(A);
+					let latexB = matrixToLatex(B);
+					let latexResult = matrixToLatex(result);
+
+                    let formula = `${latexA} + ${latexB} = ${latexResult}`;
+					let rendered = katex.renderToString(formula, {
+						throwOnError: false,
+						displayMode: true
+					});
+					
+					document.getElementById('add_result').innerHTML = rendered;
+				} catch (error) {
+					document.getElementById('add_result').innerHTML = 
+						`<div style="color: red;">Ошибка: ${error.message}</div>`;
+				}
+			}
+			
+			// Умножение матриц
+			function multiplyMatrices() {
+				try {
+					let aText = document.querySelector('#mult_matrix_a').value;
+					let bText = document.querySelector('#mult_matrix_b').value;
+					
+					let A = textToMatrix(aText);
+					let B = textToMatrix(bText);
+					
+					if (A[0].length !== B.length) {
+						document.getElementById('mult_result').innerHTML = 
+							'<div style="color: red;">Ошибка: число столбцов матрицы A должно равняться числу строк матрицы B!</div>';
+						return;
+					}
+					
+					let rowsA = A.length;
+					let colsA = A[0].length;
+					let colsB = B[0].length;
+					let result = [];
+					
+					// Умножение
+					for (let i = 0; i < rowsA; i++) {
+						result[i] = [];
+						for (let j = 0; j < colsB; j++) {
+							let sum = 0;
+							for (let k = 0; k < colsA; k++) {
+								sum += A[i][k] * B[k][j];
+							}
+							result[i][j] = sum;
+						}
+					}
+					
+					let latexA = matrixToLatex(A);
+					let latexB = matrixToLatex(B);
+					let latexResult = matrixToLatex(result);
+
+                    let formula = `${latexA} \\times ${latexB} = ${latexResult}`;
+					let rendered = katex.renderToString(formula, {
+						throwOnError: false,
+						displayMode: true
+					});
+					
+					document.getElementById('mult_result').innerHTML = rendered;
+				} catch (error) {
+					document.getElementById('mult_result').innerHTML = 
+						`<div style="color: red;">Ошибка: ${error.message}</div>`;
+				}
+			}
+
+			// Вычисление определителя матрицы 2×2
+			function calculateDeterminant2x2() {
+    			try {
+        		// Получаем значения из input полей
+        		let a = parseFloat(document.getElementById('det_a11').value);
+        		let b = parseFloat(document.getElementById('det_a12').value);
+        		let c = parseFloat(document.getElementById('det_a21').value);
+        		let d = parseFloat(document.getElementById('det_a22').value);
+        
+        		if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+            		document.getElementById('det_result').innerHTML = 
+                		'<div style="color: red;">Ошибка: все поля должны содержать числа!</div>';
+            		return;
+        		}
+        
+        		// Вычисляем определитель
+        		let determinant = (a * d) - (b * c);
+        
+        		let formula1 = katex.renderToString(
+            		`A = \\begin{pmatrix} ${a} & ${b} \\\\ ${c} & ${d} \\end{pmatrix}`, 
+            		{throwOnError: false, displayMode: true}
+        		);
+        
+        		let formula2 = katex.renderToString(
+            		`|A| = \\begin{vmatrix} ${a} & ${b} \\\\ ${c} & ${d} \\end{vmatrix} = `, 
+            		{throwOnError: false, displayMode: true}
+        		);
+        
+        		let formula3 = katex.renderToString(
+            		` = (${a} \\cdot ${d}) - (${b} \\cdot ${c}) = ${a * d} - ${b * c} = ${determinant}`, 
+            		{throwOnError: false, displayMode: true}
+        		);
+        
+        		let explanation = '';
+        		let explanationClass = '';
+        		if (determinant === 0) {
+            		explanation = 'Матрица вырожденная (определитель равен 0)';
+            		explanationClass = 'result-zero';
+        		} else if (determinant > 0) {
+            		explanation = `Определитель положительный: ${determinant}`;
+            		explanationClass = 'result-positive';
+        		} else {
+            		explanation = `Определитель отрицательный: ${determinant}`;
+            		explanationClass = 'result-negative';
+        		}
+        
+        		document.getElementById('det_result').innerHTML = 
+            		`<div style="margin-bottom: 10px;">${formula1}</div>` +
+            		`<div style="margin-bottom: 10px;">${formula2}</div>` +
+            		`<div style="margin-bottom: 20px;">${formula3}</div>` +
+            		`<div class="result-explanation ${explanationClass}">${explanation}</div>`;
+            
+    			} catch (error) {
+       				 document.getElementById('det_result').innerHTML = 
+            		`<div style="color: red;">Ошибка: ${error.message}</div>`;
+   				 }
+			}
+			
+			function loadExampleDet() {
+				document.getElementById('det_a11').value = 10;
+				document.getElementById('det_a12').value = 3;
+				document.getElementById('det_a21').value = 12;
+				document.getElementById('det_a22').value = 4;
+				
+				setTimeout(calculateDeterminant2x2, 100);
+			}
+			
+			function clearAddInput() {
+				document.querySelector('#add_matrix_a').value = '';
+				document.querySelector('#add_matrix_b').value = '';
+				document.getElementById('add_result').innerHTML = 'Результат появится здесь...';
+			}
+			
+			function clearMultInput() {
+				document.querySelector('#mult_matrix_a').value = '';
+				document.querySelector('#mult_matrix_b').value = '';
+				document.getElementById('mult_result').innerHTML = 'Результат появится здесь...';
+			}
+
+			function clearDetInput() {
+				document.getElementById('det_a11').value = '';
+				document.getElementById('det_a12').value = '';
+				document.getElementById('det_a21').value = '';
+				document.getElementById('det_a22').value = '';
+				document.getElementById('det_result').innerHTML = 'Результат появится здесь...';
+			}
+			
+			// Автоматический рендеринг формул при изменении слайдов
+			Reveal.on('slidechanged', function(event) {
+				setTimeout(() => {
+					renderMathInElement(document.body, {
+						delimiters: [
+							{left: '$$', right: '$$', display: true},
+							{left: '$', right: '$', display: false},
+							{left: '\\(', right: '\\)', display: false},
+							{left: '\\[', right: '\\]', display: true}
+						],
+						throwOnError: false
+					});
+				}, 100);
+			});
+			
+			// Инициализация рендеринга формул
+			document.addEventListener('DOMContentLoaded', function() {
+				renderMathInElement(document.body, {
+					delimiters: [
+						{left: '$$', right: '$$', display: true},
+						{left: '$', right: '$', display: false},
+						{left: '\\(', right: '\\)', display: false},
+						{left: '\\[', right: '\\]', display: true}
+					],
+					throwOnError: false
+				});
+				
+				// Загружаем пример для определителя при загрузке страницы
+				loadExampleDet();
 			});
 		</script>
 	</body>
