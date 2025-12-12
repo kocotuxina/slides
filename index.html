@@ -100,8 +100,51 @@
 				margin-top: 5px;
 				text-align: center;
 			}
-			.code {
-
+			
+			.result-explanation {
+				margin-top: 15px;
+				padding: 10px;
+				border-radius: 5px;
+				font-weight: bold;
+				text-align: center;
+			}
+			
+			.result-positive {
+				color: #388e3c;
+				background-color: #e8f5e9;
+			}
+			
+			.result-negative {
+				color: #f57c00;
+				background-color: #fff3e0;
+			}
+			
+			.result-zero {
+				color: #d32f2f;
+				background-color: #ffebee;
+			}
+			
+			.back-button {
+				margin-top: 30px;
+				padding: 10px 30px;
+				font-size: 16px;
+				background-color: #4caf50;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+			
+			.back-button:hover {
+				background-color: #45a049;
+			}
+			
+			.auto-transition-notice {
+				margin-top: 10px;
+				color: #666;
+				font-size: 14px;
+				font-style: italic;
 			}
 			
 			
@@ -158,6 +201,11 @@
 				<section data-markdown="markdown/matrix_ed.md"></section>
 				<section data-markdown="markdown/matrix_up_tri.md"></section>
 				<section data-markdown="markdown/matrix_down_tri.md"></section>
+				<section 
+						data-background-image="img/img3.jpg"
+						data-background-size="contain"
+						data-menu-title="Мем"
+					></section>
 				<section class="center">
 					<h2>
 						Операции над матрицами
@@ -367,7 +415,6 @@
 								<input type="number" id="det_a21" value="12" placeholder="c">
 								<input type="number" id="det_a22" value="4" placeholder="d">
 							</div>
-						
 							<div class="matrix-controls">
 								<button onclick="calculateDeterminant2x2()">Вычислить определитель</button>
 								<button onclick="clearDetInput()">Очистить</button>
@@ -378,12 +425,18 @@
 							</div>
 						</div>
 					</section>
-					<section data-menu-title="Результат определителя матрицы">
+					<section id="determinant-result-slide" data-menu-title="Результат определителя матрицы">
 						<div id="det_result" class="result-container">
 							Результат появится здесь...
 						</div>
+						<button class="back-button" onclick="goBackToDeterminantInput()">Вернуться к вводу</button>
 					</section>
 				</section>
+				<section 
+						data-background-image="img/img4.webp"
+						data-background-size="contain"
+						data-menu-title="Мем"
+					></section>
 				<section>
 					<h3>Исходный код программы:</h3>
 					<pre><code class="javascript" data-trim data-line-numbers>
@@ -431,6 +484,10 @@
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
+
+			// Глобальная переменная для хранения таймера
+			let transitionTimer = null;
+			let countdownInterval = null;
 
 			// Преобразование текста в матрицу (числовой массив)
 			function textToMatrix(text) {
@@ -555,6 +612,71 @@
 				}
 			}
 
+			// Функция для перехода к слайду с результатом
+			function goToDeterminantResult() {
+				// Отменяем предыдущий таймер, если он есть
+				if (transitionTimer) {
+					clearTimeout(transitionTimer);
+				}
+				if (countdownInterval) {
+					clearInterval(countdownInterval);
+				}
+				
+				// Переходим к следующему слайду (результату)
+				Reveal.next();
+				
+				// Обновляем отображение формул
+				setTimeout(() => {
+					renderMathInElement(document.getElementById('det_result'), {
+						delimiters: [
+							{left: '$$', right: '$$', display: true},
+							{left: '$', right: '$', display: false},
+							{left: '\\(', right: '\\)', display: false},
+							{left: '\\[', right: '\\]', display: true}
+						],
+						throwOnError: false
+					});
+				}, 100);
+			}
+
+			// Функция для возврата к слайду с вводом
+			function goBackToDeterminantInput() {
+				// Отменяем таймеры
+				if (transitionTimer) {
+					clearTimeout(transitionTimer);
+				}
+				if (countdownInterval) {
+					clearInterval(countdownInterval);
+				}
+				
+				// Переходим к предыдущему слайду (вводу)
+				Reveal.prev();
+			}
+
+			// Функция для обратного отсчета
+			function startCountdown() {
+				let seconds = 3;
+				const countdownElement = document.getElementById('countdown');
+				const noticeElement = document.getElementById('transition-notice');
+				
+				if (countdownElement && noticeElement) {
+					// Показываем обратный отсчет
+					noticeElement.style.display = 'block';
+					countdownElement.textContent = seconds;
+					
+					// Запускаем интервал для обновления отсчета
+					countdownInterval = setInterval(() => {
+						seconds--;
+						countdownElement.textContent = seconds;
+						
+						if (seconds <= 0) {
+							clearInterval(countdownInterval);
+							noticeElement.style.display = 'none';
+						}
+					}, 1000);
+				}
+			}
+
 			// Вычисление определителя матрицы 2×2
 			function calculateDeterminant2x2() {
     			try {
@@ -611,6 +733,11 @@
        				 document.getElementById('det_result').innerHTML = 
             		`<div style="color: red;">Ошибка: ${error.message}</div>`;
    				 }
+				// Запускаем обратный отсчет
+				startCountdown();
+				
+				// Устанавливаем таймер для автоматического перехода через 3 секунды
+				transitionTimer = setTimeout(goToDeterminantResult, 3000);
 			}
 			
 			function loadExampleDet() {
@@ -655,6 +782,25 @@
 						throwOnError: false
 					});
 				}, 100);
+				
+				// Отменяем таймер, если пользователь вручную перешел на другой слайд
+				const currentSlide = event.currentSlide;
+				if (!currentSlide || !currentSlide.id === 'determinant-result-slide') {
+					if (transitionTimer) {
+						clearTimeout(transitionTimer);
+						transitionTimer = null;
+					}
+					if (countdownInterval) {
+						clearInterval(countdownInterval);
+						countdownInterval = null;
+					}
+					
+					// Скрываем обратный отсчет
+					const noticeElement = document.getElementById('transition-notice');
+					if (noticeElement) {
+						noticeElement.style.display = 'none';
+					}
+				}
 			});
 			
 			// Инициализация рендеринга формул
